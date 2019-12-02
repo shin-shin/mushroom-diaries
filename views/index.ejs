@@ -1,22 +1,97 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+<%- include('./partials/header') %>
+<% if (!user) { %>
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center orange-text">Welcome to <%= title %></h1>
+    <div class="row center">
+      <h5 class="header col s12 light">A place to keep track of all your mushroom growing processes.</h5>
+    </div>
+    <div class="row center">
 
-    <ul class="right">
-      <li>
-      <% if (user) { %>
-        <a href="/logout">Log Out</a>
-      <% } else { %>
-        <a href="/auth/google">Login with Google</a>
-      <% } %>
-      </li>
-    </ul>
 
-  </body>
-</html>
+      <a href="/auth/google" class="btn-large waves-effect waves-light orange">Login with Google</a>
+
+
+
+    </div>
+    <br><br>
+
+  </div>
+</div>
+<% } else { %>
+
+
+
+<div class="container">
+  <div class="section">
+
+    <!--   Icon Section   -->
+
+    <% cards.forEach(c => { %>
+
+
+    <div class="row">
+      <div class="col s12 m4">
+        <h5 class="center"><%= c.variety.name %></h5>
+        <em>(<%= c.variety.latin %>)</em>
+        <p class="light">
+          <%= c.type %>
+        </p>
+        <p class="light">
+          <%= c.label %>
+        </p>
+        <p class="light">
+          <%= c.date %>
+        </p>
+
+        <a class="waves-effect waves-light btn" href="/cards/<%= c._id %>/edit">edit</a>
+        <a class="waves-effect waves-light btn" href="/cards/<%= c._id %>">view</a>
+
+      </div>
+      <% }); %>
+
+
+      <!-- <div class="row">
+            <div class="col s12 m4">
+                <h5 class="center">Mushroom 1</h5>
+    
+                <p class="light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, aliquid! Est tempore praesentium fuga magni quae fugiat ab totam, dolorum perspiciatis. Sequi ab rerum ullam dignissimos animi expedita vel cupiditate.</p>
+                <a class="waves-effect waves-light btn" href="/">edit</a>
+                <a class="waves-effect waves-light btn" href="/">view</a>
+
+            </div>
+    
+            <div class="col s12 m4">
+                <h5 class="center">Mushroom 2</h5>
+    
+                <p class="light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, aliquid! Est tempore praesentium fuga magni quae fugiat ab totam, dolorum perspiciatis. Sequi ab rerum ullam dignissimos animi expedita vel cupiditate.</p>
+
+                <a class="waves-effect waves-light btn" href="/">edit</a>
+                <a class="waves-effect waves-light btn" href="/">view</a>
+
+            </div>
+    
+            <div class="col s12 m4">
+                <h5 class="center">Mushroom 3</h5>
+    
+                <p class="light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat, aliquid! Est tempore praesentium fuga magni quae fugiat ab totam, dolorum perspiciatis. Sequi ab rerum ullam dignissimos animi expedita vel cupiditate.</p>
+
+                <a class="waves-effect waves-light btn" href="/">edit</a>
+                <a class="waves-effect waves-light btn" href="/">view</a>
+
+            </div>
+          </div> -->
+
+    </div>
+    <br><br>
+
+    <a class="waves-effect waves-light btn-large" href="/cards/new"><i class="material-icons right">add</i>new card</a>
+
+  </div>
+
+
+
+  <% } %>
+
+  <%- include('./partials/footer') %>

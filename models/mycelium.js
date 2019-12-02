@@ -12,18 +12,19 @@ const logSchema = new Schema({
     timestamps: true
 });
 
-const mycelium  =new Schema({
-    variety_id: {
+const myceliumSchema  = new Schema({
+    variety: {
         type: Schema.Types.ObjectId,
-        ref: 'Varieties',
+        ref: 'Variety',
         required: true
     },
     gen: {
         type: Number,
         // required: true
     },
+    suf: String,
     gen_label: {
-        // not sure how to make it out of Variety abbr + gen 
+        // not sure how to make it out of Variety abbr + gen + suf
     },
     parent_id: {
         type: Schema.Types.ObjectId,
@@ -31,7 +32,7 @@ const mycelium  =new Schema({
     },
     type: {
         type: String,
-        enum: ['liquid culture', 'petri dish', 'slant', 'grain spawn', 'sawdust spawn','woodchip spawn', 'plug spawn', 'substrate', 'log'],
+        enum: ['liquid culture', 'agar culture', 'slant', 'grain spawn', 'sawdust spawn','woodchip spawn', 'plug spawn', 'substrate', 'log', 'outdoor patch'],
         required: true
     },
     date: {
@@ -40,7 +41,7 @@ const mycelium  =new Schema({
     },
     log: [logSchema],
     note: String,
-    current: true,
+    current: Boolean,
     user_id: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -51,4 +52,4 @@ const mycelium  =new Schema({
     timestamps:true
 });
 
-module.export = mongoose.module('Mycelium', myceliumSchema)
+module.exports = mongoose.model('Mycelium', myceliumSchema)

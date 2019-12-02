@@ -6,6 +6,10 @@ const varietySchema = new Schema({
         type: String,
         required: true
     },
+    latin: {
+        type: String,
+        required: true
+    },
     abbr: {
         type: String,
         required: true
