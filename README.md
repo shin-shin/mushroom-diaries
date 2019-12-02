@@ -25,7 +25,7 @@ AAU I want to be able to add logs for each mycelium I am working with, as well a
 AAU I want to be able to see parent mycelium and children mycelium for each card (where parent is provided).
 
 ## Wireframes
-![wireframes](/images/wireframes.png)
+![wireframes](public/images/wireframes.png)
 
 ## Nice to haves
 
