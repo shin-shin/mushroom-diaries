@@ -10,20 +10,20 @@
     <link href="/stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="/stylesheets/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
-    <script defer type="text/javascript" src="/javascripts/materialize.js"></script>
     <title><%= title %></title>
 </head>
 
 <body>
     <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Mushroom Diaries</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/">current</a></li>
-                <li><a href="/new">new</a></li>
-                <li><a href="/archive">archive</a></li>
-                <li><a href="/categories">categories</a></li>
-                <li><a href="/weather">weather</a></li>
-                <li><a href="/calendar">calendar</a></li>
+                <li><a href="/cards/new">new</a></li>
+                <li><a href="cards/archive">archive</a></li>
+                <li><a href="cards/categories">categories</a></li>
+                <!-- <li><a href="/weather">weather</a></li>
+                <li><a href="/calendar">calendar</a></li> -->
                 <li>
                     <% if (user) { %>
                     <a href="/logout">Log Out</a>
@@ -33,14 +33,14 @@
                 </li>
             </ul>
 
-            <ul id="nav-mobile" class="sidenav">
-                    <li><a href="/">current</a></li>
-                    <li><a href="/new">new</a></li>
-                    <li><a href="/archive">archive</a></li>
-                    <li><a href="/categories">categories</a></li>
-                    <li><a href="/weather">weather</a></li>
-                    <li><a href="/calendar">calendar</a></li>
-                    <li>
+            <ul id="nav-mobile" class="sidenav light-blue  lighten-1">
+                <li><a href="/">current</a></li>
+                <li><a href="/cards/new">new</a></li>
+                <li><a href="cards/archive">archive</a></li>
+                <li><a href="cards/categories">categories</a></li>
+                <!-- <li><a href="/weather">weather</a></li>
+                    <li><a href="/calendar">calendar</a></li> -->
+                <li>
                     <% if (user) { %>
                     <a href="/logout">Log Out</a>
                     <% } else { %>
@@ -49,5 +49,6 @@
                 </li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <%= parseInt(new Date().getMonth()) + 1 + "/" + new Date().getDate() + "/" + new Date().getFullYear() %>
         </div>
     </nav>

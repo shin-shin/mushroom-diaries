@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-const usersCtrl = require('../controllers/index')
+const cardsCtrl = require('../controllers/index')
 
 /* GET home page. */
-router.get('/cards/new', usersCtrl.new);
-router.post('/cards', usersCtrl.create);
-router.get('/', usersCtrl.index);
-
+router.get('/cards/new', cardsCtrl.new);
+router.get('/cards/:id', cardsCtrl.show);
+router.post('/cards', cardsCtrl.create);
+router.get('/', cardsCtrl.index);
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
   'google',

@@ -2,8 +2,26 @@ const User = require('../models/user');
 var Mycelium = require('../models/mycelium');
 var Variety = require('../models/variety');
 
+var request = require('request');
+
+var DarkSkyApi = require('dark-sky-api');
+
+var DARKSKY_URL = `https://api.darksky.net/forecast/`;
+// var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/37.8267,-122.4233`;
+
+
+
+
 function index(req, res, next) {
   console.log("Index!!!")
+  // console.log("DARKSKY_URL: ", DARKSKY_URL + process.env.DARKSKY_SECRET + Navigator.geolocation.getCurrentPosition());
+
+
+  // request(DARKSKY_URL + process.env.DARKSKY_SECRET + Geolocation.getCurrentPosition(), (err, response, body) => {
+  //   console.log('temperature ' + body.temperature);
+  //   console.table(req.body);
+  // });
+
 
   Mycelium.find({}).populate('variety').exec(
     function (err, cards) {
@@ -12,8 +30,9 @@ function index(req, res, next) {
         // users: null,
         user: req.user,
         name: req.query.name,
-        title: 'Log In',
+        title: 'Mushroom Diaries',
         cards,
+        temp: ""
       });
     }
   )
@@ -36,8 +55,39 @@ function newCard(req, res, next) {
 
 function create(req, res, next) {
   console.log("create starts");
-  console.log(req.user);
+  console.table(req.body);
   req.body.user_id = req.user._id;
+  console.log("ID ", req.user._id);
+  if (!req.body.variety) {
+    
+  console.log("NEW VARIETY");
+
+  let variety = new Variety({
+    name: req.body.new_variety,
+    latin: req.body.new_latin,
+    abbr: req.body.new_abbr
+  } );
+  variety.save(function (err) {
+    if (err) {
+      console.log("error when saving a variety");
+      console.log(err);
+    }
+    req.body.variety = variety;
+    let card = new Mycelium(req.body);
+
+    card.save(function (err) {
+    if (err) {
+      console.log("error when saving a card");
+      console.log(err);
+    }
+    res.redirect('/');
+  })
+  })
+
+    console.log("NEW VARIETY - CREATED!!!");
+  } else {
+
+
   let card = new Mycelium(req.body);
 
   card.save(function (err) {
@@ -48,9 +98,28 @@ function create(req, res, next) {
     res.redirect('/');
   })
 }
+}
+
+
+function show(req, res) {
+  Mycelium.findById(req.params.id)
+    .populate('variety')
+    .exec(function (err, mycelium) {
+      console.log(mycelium);
+
+      res.render('show', {
+
+        user: req.user,
+        name: req.query.name,
+        title: mycelium.variety.name,
+        mycelium
+      });
+    })
+}
 
 module.exports = {
   index,
   new: newCard,
-  create
+  create,
+  show
 }
