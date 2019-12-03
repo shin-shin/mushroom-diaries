@@ -1,6 +1,7 @@
 <%- include('./partials/header') %>
 <div class="section no-pad-bot" id="index-banner">
         <div class="container">
+        <div class="card">
           <br><br>
           <h3 class="header center pink-text text-lighten-2"><%= mycelium.variety.name %></h3>
           <h5 class="header center pink-text text-lighten-2"><em>(<%= mycelium.variety.latin %>)</em></h5>
@@ -8,7 +9,6 @@
           <div class="row center">
         <p><%= mycelium.type %></p>
 
-            <p><%= mycelium.label %></p>
               
             <p><%= mycelium.date %></p>
 
@@ -26,6 +26,7 @@
           </div>
           <br><br>
     
+        </div>
         </div>
       </div>
 <%- include('./partials/footer') %>

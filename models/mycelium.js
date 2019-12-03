@@ -24,6 +24,7 @@ const myceliumSchema  = new Schema({
     },
     suf: String,
     gen_label: {
+        type: String
         // not sure how to make it out of Variety abbr + gen + suf
     },
     parent_id: {

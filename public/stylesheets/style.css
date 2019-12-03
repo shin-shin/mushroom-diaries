@@ -5,12 +5,21 @@
  *
  * Made By MaterializeCSS.com
  */
-body{
+/* body{
   min-height: 100vh;
-}
+} */
 .icon-block {
   padding: 0 15px;
 }
 .icon-block .material-icons {
 	font-size: inherit;
+}
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }

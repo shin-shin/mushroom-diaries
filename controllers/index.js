@@ -6,36 +6,40 @@ var request = require('request');
 
 var DarkSkyApi = require('dark-sky-api');
 
-var DARKSKY_URL = `https://api.darksky.net/forecast/`;
-// var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/37.8267,-122.4233`;
+//var DARKSKY_URL = `https://api.darksky.net/forecast/`;
+var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/37.8267,-122.4233`;
 
 
 
 
 function index(req, res, next) {
   console.log("Index!!!")
+  console.log(DARKSKY_URL)
   // console.log("DARKSKY_URL: ", DARKSKY_URL + process.env.DARKSKY_SECRET + Navigator.geolocation.getCurrentPosition());
 
 
-  // request(DARKSKY_URL + process.env.DARKSKY_SECRET + Geolocation.getCurrentPosition(), (err, response, body) => {
-  //   console.log('temperature ' + body.temperature);
-  //   console.table(req.body);
-  // });
+  request(DARKSKY_URL, (err, response, body) => {
+    let weatherJSON = JSON.parse(body);
+    let temp = weatherJSON.currently.temperature
+    console.log('temperature ' + temp);
+
+    Mycelium.find({}).populate('variety').exec(
+      function (err, cards) {
+        console.log("found cards")
+        res.render('index', {
+          // users: null,
+          user: req.user,
+          name: req.query.name,
+          title: 'Mushroom Diaries',
+          cards,
+          temp,
+        });
+      }
+    )
+  });
 
 
-  Mycelium.find({}).populate('variety').exec(
-    function (err, cards) {
-      console.log("found cards")
-      res.render('index', {
-        // users: null,
-        user: req.user,
-        name: req.query.name,
-        title: 'Mushroom Diaries',
-        cards,
-        temp: ""
-      });
-    }
-  )
+
   //console.table(req.body);
 }
 
@@ -112,7 +116,8 @@ function show(req, res) {
         user: req.user,
         name: req.query.name,
         title: mycelium.variety.name,
-        mycelium
+        mycelium,
+        // label: `${mycelium.variety.abbr}:${mycelium.gen}:${mycelium.suf}`
       });
     })
 }
