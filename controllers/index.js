@@ -7,7 +7,7 @@ var request = require('request');
 var DarkSkyApi = require('dark-sky-api');
 
 //var DARKSKY_URL = `https://api.darksky.net/forecast/`;
-var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/37.8267,-122.4233`;
+var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/30.267153,-97.7430608`;
 
 
 
