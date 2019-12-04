@@ -1,12 +1,13 @@
 <%- include('./partials/header') %>
 <div class="section no-pad-bot" id="index-banner">
         <div class="container">
+            <br>
+          <div class="row center">
         <div class="card">
           <br><br>
           <h3 class="header center pink-text text-lighten-2"><%= mycelium.variety.name %></h3>
           <h5 class="header center pink-text text-lighten-2"><em>(<%= mycelium.variety.latin %>)</em></h5>
           
-          <div class="row center">
           <p><%= mycelium.type %></p>
 
               
@@ -20,14 +21,22 @@
 
             <a class="waves-effect waves-light btn-large pink lighten-2" href="/">add status</a>
             <a class="waves-effect waves-light btn-large pink lighten-2" href="/">add note</a>
-            <a class="waves-effect waves-light btn-large pink lighten-2" href="/">archive</a>
+            <form action="/cards/<%= 
+            mycelium._id %>?_method=PUT" method="POST" name="current">
+            <button class="waves-effect waves-light btn-large pink lighten-2" href="/">archive</button>
+          </form>
+
+          <form action="/cards/<%= 
+            mycelium._id %>?_method=DELETE" method="POST" name="delete">
+            <button class="waves-effect waves-light btn-large pink lighten-2" href="/">delete</button>
+          </form>
             
               
                   
                 
+            <br><br>
+            
           </div>
-          <br><br>
-    
         </div>
         </div>
       </div>

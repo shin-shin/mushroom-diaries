@@ -6,8 +6,12 @@ const cardsCtrl = require('../controllers/index')
 /* GET home page. */
 router.get('/cards/new', cardsCtrl.new);
 router.get('/cards/:id', cardsCtrl.show);
+router.put('/cards/:id', cardsCtrl.archive);
+router.delete('/cards/:id', cardsCtrl.delete);
 router.post('/cards', cardsCtrl.create);
 router.get('/', cardsCtrl.index);
+
+
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
   'google',
