@@ -4,9 +4,6 @@ var Variety = require('../models/variety');
 
 var request = require('request');
 var moment = require('moment');
-var DarkSkyApi = require('dark-sky-api');
-
-//var DARKSKY_URL = `https://api.darksky.net/forecast/`;
 var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/30.267153,-97.7430608`;
 
 
@@ -37,6 +34,8 @@ function index(req, res, next) {
           title: 'Mushroom Diaries',
           cards,
           temp,
+          today: moment().format('MMM D')
+
         });
       }
     )
