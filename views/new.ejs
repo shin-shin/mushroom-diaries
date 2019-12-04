@@ -10,7 +10,7 @@
                 <input type="hidden" name="foo" value="bla">
                 <div class="input-field col s12">
                     <select name="variety">
-                        <option value="" disabled selected>Select mushroom variety</option>
+                        <option value=""  selected>Select mushroom variety</option>
                         <% vars.forEach( v => { %>
                         <option value="<%= v._id %>"><%= v.name %></option>
                         <% }); %>
@@ -69,7 +69,7 @@
                     <input placeholder="Mushroom" type="text" class="validate" name="parent">
                 </div> -->
 
-                <button class="waves-effect waves-light btn-large pink lighten-2" type="submit">create</button>
+                <button class="waves-effect waves-light btn-large blue-grey lighten-2" type="submit">create</button>
             </form>
 
 

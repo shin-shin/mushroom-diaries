@@ -13,14 +13,14 @@
     <title><%= title %></title>
 </head>
 
-<body>
-    <nav class="light-blue lighten-1" role="navigation">
+<body class="blue-grey lighten-5">
+    <nav class="blue-grey lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Mushroom Diaries</a>
+            <a id="logo-container" href="/" class="brand-logo">Mushroom Diaries</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/">current</a></li>
                 <li><a href="/cards/new">new</a></li>
-                <li><a href="/">archive</a></li>
+                <li><a href="/?archive">archive</a></li>
                 <li><a href="/">varieties</a></li>
                 <!-- <li><a href="/weather">weather</a></li>
                 <li><a href="/calendar">calendar</a></li> -->
@@ -33,7 +33,7 @@
                 </li>
             </ul>
 
-            <ul id="nav-mobile" class="sidenav light-blue  lighten-1">
+            <ul id="nav-mobile" class="sidenav blue-grey  lighten-1">
                 <li><a href="/">current</a></li>
                 <li><a href="/cards/new">new</a></li>
                 <li><a href="/?archive">archive</a></li>
@@ -53,7 +53,7 @@
 
         </div>
         <div class="nav-wrapper container">
-            <h6 class="left light-blue-text text-lighten-2"><%= temp + String.fromCharCode(176) + "F"%></h6>
-        <h6 class="right light-blue-text text-lighten-2"><%= today %></h6>
+            <h6 class="left blue-grey-text text-lighten-2"><%= moment().format('MMM D') %></h6>
+            <h6 class="right blue-grey-text text-lighten-2"><%= temp + String.fromCharCode(176) + "F"%></h6>
     </div>
     </nav>

@@ -23,3 +23,11 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+.hide {
+  display: none;
+}
+
+.foo :nth-child(odd) {
+  background-color: #eceff1 ;
+}

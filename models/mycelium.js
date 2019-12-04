@@ -23,10 +23,6 @@ const myceliumSchema  = new Schema({
         // required: true
     },
     suf: String,
-    gen_label: {
-        type: String
-        // not sure how to make it out of Variety abbr + gen + suf
-    },
     parent_id: {
         type: Schema.Types.ObjectId,
         ref: "Mycelium" 

@@ -3,14 +3,14 @@
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
     <br><br>
-    <h1 class="header center pink-text text-lighten-2">Welcome to <%= title %></h1>
+    <h1 class="header center blue-grey-text text-lighten-2">Welcome to <%= title %></h1>
     <div class="row center">
       <h5 class="header col s12 light">A place to keep track of all your mushroom growing processes.</h5>
     </div>
     <div class="row center">
 
 
-      <a href="/auth/google" class="btn-large waves-effect waves-light pink lighten-2">Login with Google</a>
+      <a href="/auth/google" class="btn-large waves-effect waves-light blue-grey lighten-2">Login with Google</a>
 
 
 
@@ -36,20 +36,26 @@
           <div class="card">
             <div class="card-content">
               <h5 class="center"><%= c.variety.name %></h5>
-              <em>(<%= c.variety.latin %>)</em>
-              <p class="light">
+              <h6 class="center"><em>(<%= c.variety.latin %>)</em></h6>
+              <p class="light"><b>Type: </b>
                 <%= c.type %>
               </p>
               <p class="light">
-              <%= c.label %>
+              <% if (c.gen) { %>
+                <b>Label: </b>
+                <%= `${c.variety.abbr}:${c.gen}` %>
+                <% if (c.suf){ %>
+                  <%= `:${c.suf}` %>
+                <% } %>
+              <% } %>
               </p>
               <p class="light">
-                <%= c.date %>
+                <%= moment(c.date).format('MMMM Do, YYYY') %>
               </p>
             </div>
 
-            <!-- <a class="waves-effect waves-light btn pink lighten-2" href="/cards/<%= c._id %>/edit">edit</a> -->
-            <a class="waves-effect waves-light btn pink lighten-2" href="/cards/<%= c._id %>">view</a>
+            <!-- <a class="waves-effect waves-light btn blue-grey lighten-2" href="/cards/<%= c._id %>/edit">edit</a> -->
+            <a class="waves-effect waves-light btn blue-grey lighten-2" href="/cards/<%= c._id %>">view</a>
 
           </div>
         </div>
@@ -59,7 +65,7 @@
       <br><br>
       <div class="row">
         <div class="col s12 m4">
-          <a class="waves-effect waves-light btn-large pink lighten-2" href="/cards/new"><i
+          <a class="waves-effect waves-light btn-large blue-grey lighten-2" href="/cards/new"><i
               class="material-icons right">add</i>new
             card</a>
         </div>

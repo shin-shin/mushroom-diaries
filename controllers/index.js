@@ -4,6 +4,8 @@ var Variety = require('../models/variety');
 
 var request = require('request');
 var moment = require('moment');
+
+const DarkSkyApi = require('dark-sky-api');
 var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/30.267153,-97.7430608`;
 
 
@@ -17,7 +19,7 @@ function index(req, res, next) {
 
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
-    let temp = weatherJSON.currently.temperature
+    let temp = Math.round(weatherJSON.currently.temperature)
     console.log('temperature ' + temp);
 
     let mode = true
@@ -34,7 +36,7 @@ function index(req, res, next) {
           title: 'Mushroom Diaries',
           cards,
           temp,
-          today: moment().format('MMM D')
+          moment
 
         });
       }
@@ -50,7 +52,7 @@ function newCard(req, res, next) {
 
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
-    let temp = weatherJSON.currently.temperature
+    let temp = Math.round(weatherJSON.currently.temperature)
     console.log('temperature ' + temp);
 
     Variety.find({}, function (err, vars) {
@@ -60,6 +62,7 @@ function newCard(req, res, next) {
         user: req.user,
         name: req.query.name,
         title: 'New card',
+        moment,
         temp,
         vars,
         types: ['liquid culture', 'agar culture', 'slant', 'grain spawn', 'sawdust spawn', 'woodchip spawn', 'plug spawn', 'substrate', 'log', 'outdoor patch']
@@ -124,8 +127,7 @@ function show(req, res) {
 
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
-    let temp = weatherJSON.currently.temperature
-    console.log('temperature ' + temp);
+    let temp = Math.round(weatherJSON.currently.temperature)
 
     Mycelium.findById(req.params.id)
       .populate('variety')
@@ -137,6 +139,7 @@ function show(req, res) {
           user: req.user,
           name: req.query.name,
           title: mycelium.variety.name,
+          moment,
           temp,
           mycelium,
           // label: `${mycelium.variety.abbr}:${mycelium.gen}:${mycelium.suf}`
@@ -151,7 +154,7 @@ function show(req, res) {
 }
 
 function archive(req, res){
-  Mycelium.findById(req.params.id,function (err, mycelium) {
+  Mycelium.findById(req.params.id, function (err, mycelium) {
     console.log("ARCHIVE");
     mycelium.current = !mycelium.current;
     mycelium.save(function (err) {
@@ -161,10 +164,42 @@ function archive(req, res){
 }
 function delMush(req, res){
   console.log("DELETE MUSHROOM");
-  Mycelium.deleteOne({_id: req.params.id},function (err) {
+  Mycelium.deleteOne({_id: req.params.id}, function (err) {
     res.redirect('/');
   })
 }
+
+function createLog (req, res, next) {
+  console.log("create LOG starts");
+  console.table(req.body);
+  // req.body.log = 
+
+
+  Mycelium.findById(req.params.id, function (err, mycelium) {
+    console.log("NEW STATUS LOG");
+
+    mycelium.log.push({text: req.body.text});
+    // mycelium.log = req.body;
+
+    console.log("mycelium.log ", mycelium.log);
+
+    mycelium.save(function (err) {
+      res.redirect(`/cards/${req.params.id}`);
+    })
+  })
+}
+
+function editLog(req, res){
+  Mycelium.findById(req.params.id).populate('log')
+  .exec(function (err, mycelium) {
+    console.log("EDIT");
+    mycelium.log.text = req.body.text;
+    mycelium.save(function (err) {
+      res.redirect(`/cards/${req.params.id}`);
+    })}
+  )
+}
+
 
 module.exports = {
   index,
@@ -172,5 +207,7 @@ module.exports = {
   create,
   show,
   archive,
-  delete: delMush
+  delete: delMush,
+  createLog,
+  editLog
 }
