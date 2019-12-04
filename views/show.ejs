@@ -42,11 +42,12 @@
             </div>
 
 
-
+            <% console.log("ID OF LOG PROBABLY ", m._id) %>
             <div class="edit hide">
               <form action="/cards/<%= 
-          mycelium._id %>/logs/<%= idx %>?_method=PUT" method="POST">
-                <input type="text" placeholder="Type current status here" name="text" value="<%= m.text %>">
+          mycelium._id %>/logs/<%= m._id %>?_method=PUT" method="POST">
+                <input type="text" placeholder="" name="text" value="<%= m.text %>">
+                <input type="hidden" placeholder="" name="_id" value="<%= m._id %>">
                 <button class=" waves-effect waves-light btn-small blue-grey lighten-2 btn-flat white-text"
                   href="/">save log</button>
               </form>

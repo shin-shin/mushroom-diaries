@@ -190,9 +190,21 @@ function createLog (req, res, next) {
 }
 
 function editLog(req, res){
-  Mycelium.findById(req.params.id).populate('log')
+  console.log("EDIT");
+  console.log("log  *************")
+  console.log(req.body._id);
+  console.log("micilyun ******")
+  console.log(req.params.id);
+  
+  console.log("*****************")
+  Mycelium.findById(req.params.id).populate('mycelium.log')
   .exec(function (err, mycelium) {
-    console.log("EDIT");
+    // console.log("EDIT mycelium: ", mycelium.log);
+    console.log("LOG ID ", req.body._id);
+    mycelium.log.findById(req.body._id, function(err){
+    })
+      // console.log("LOG ID ", req.body._id);
+    
     mycelium.log.text = req.body.text;
     mycelium.save(function (err) {
       res.redirect(`/cards/${req.params.id}`);
