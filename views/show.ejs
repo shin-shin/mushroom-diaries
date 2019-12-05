@@ -9,121 +9,100 @@
         <h5 class="header center blue-grey-text text-lighten-2"><em>(<%= mycelium.variety.latin %>)</em></h5>
 
         <div class="card-content">
-
           <p><b>Type: </b><%= mycelium.type %></p>
-
-
           <p><b>Date: </b><%= moment(mycelium.date).format('MMMM Do, YYYY') %></p>
-
+          <p>
+              <% if (mycelium.gen) { %>
+                <b>Label: </b>
+                <%= `${mycelium.variety.abbr}:${mycelium.gen}` %>
+                <% if (mycelium.suf){ %>
+                  <%= `:${mycelium.suf}` %>
+                <% } %>
+              <% } %>
+              </p>
           <% if(mycelium.parent) { %>
           <p><b>Parent: </b><%= mycelium.parent %></p>
           <% } %>
-
-
-
-
-          <% if(mycelium.note) { %>
-          <p><b>Note: </b><%= mycelium.note %></p>
-
-          <% } %>
-
-
-
-
-          <% if(mycelium.log) { %>
-          <hr>
-          <% mycelium.log.forEach( (m, idx) => {  %>
-            <br>
-          <div class="foo">
-            <div class="text">
-              <p><b>Date: </b><%= moment(m.createdAt).format('MMMM Do, YYYY') %></p>
-              <p><b>Log: </b><%= m.text %></p>
-              <a class="waves-effect waves-light btn-small blue-grey lighten-2" href="#">edit log</a>
-            </div>
-
-
-            <% console.log("ID OF LOG PROBABLY ", m._id) %>
-            <div class="edit hide">
-              <form action="/cards/<%= 
-          mycelium._id %>/logs/<%= m._id %>?_method=PUT" method="POST">
-                <input type="text" placeholder="" name="text" value="<%= m.text %>">
-                <input type="hidden" placeholder="" name="_id" value="<%= m._id %>">
-                <button class=" waves-effect waves-light btn-small blue-grey lighten-2 btn-flat white-text"
-                  href="/">save log</button>
-              </form>
-            </div>
-          </div>
-          <br>
-          <% }) %>
-
-
-          <% } %>
         </div>
 
-        <ul class="collapsible">
-          <li>
-            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">list_alt</i>Add
-              Status
+        <ul class="collapsible expandable">
+          <% if(mycelium.log.length > 0) { %>
+          <li class="active">
+            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">list_alt</i>Status
               Log</div>
-            <div class="collapsible-body">
-              <form action="/cards/<%= 
-              mycelium._id %>/logs/" method="POST">
-                <input type="text" placeholder="Type current status here" name="text">
-                <button class=" waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add
-                  log</button>
-              </form>
+            <div class="collapsible-body log">
+
+              <% mycelium.log.forEach( (m, idx) => {  %>
+                <div>
+                <div class="text">
+                  <p><b>Date: </b><%= moment(m.createdAt).format('MMMM Do, YYYY') %></p>
+                  <p><b>Log: </b><%= m.text %></p>
+                  <a class="waves-effect waves-light btn-small blue-grey lighten-2" idx="<%= idx %>" href="#">edit log</a>
+                  <button class="waves-effect waves-light btn-small blue-grey lighten-2 white-text"
+              href="/">delete</button>
+                </div>
+
+
+                <div class="edit hide">
+                  <p><b>Date: </b><%= moment(m.createdAt).format('MMMM Do, YYYY') %></p>
+                  <form action="/cards/<%= 
+                  mycelium._id %>/logs/<%= idx %>?_method=PUT" method="POST">
+                    <input type="text" placeholder="" name="text" value="<%= m.text %>">
+                    <!-- <input type="hidden" placeholder="" name="_id" value="<%= m._id %>"> -->
+                    <button class=" waves-effect waves-light btn-small blue-grey lighten-2 btn-flat white-text"
+                      href="/">save log</button>
+                  </form>
+                </div>
+              </div>
+              <% }) %>
+
+
 
             </div>
           </li>
-
+          <% } %>
           <li>
-            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">edit</i>Add/ Edit
-              note
-            </div>
-            <div class="collapsible-body">
-
+            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">edit</i>Add Status</div>
+            <div class="collapsible-body log">
+              <div>
               <form action="/cards/<%= 
-              mycelium._id %>" method="POST">
-                <input type="text" placeholder="Type current status here" name="note">
-                <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add
-                  note</button>
+              mycelium._id %>/logs/" method="POST">
+                <input type="text" placeholder="Type current status here" name="text">
+                <button class=" waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add status</button>
               </form>
+            </div>
             </div>
           </li>
         </ul>
 
 
-
-        <form action="/cards/<%= 
+        <div class="bottom-form-buttons">
+          <form action="/cards/<%= 
         mycelium._id %>?_method=PUT" method="POST" name="current">
-          <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">
-            <% if(mycelium.current === true) { %>
-            move to archive
-            <%} else { %>
-            make current
-            <%}; %>
+            <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">
+              <% if(mycelium.current === true) { %>
+              move to archive
+              <%} else { %>
+              make current
+              <%}; %>
 
-          </button>
-        </form>
-
-
-        <form action="/cards/<%= 
-    mycelium._id %>?_method=DELETE" method="POST" name="delete" class="">
-          <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text"
-            href="/">delete</button></form>
+            </button>
+          </form>
 
 
 
-
-
-        <br><br>
+          <form action="/cards/<%= mycelium._id %>?_method=DELETE" method="POST" name="delete" class="">
+            <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text"
+              href="/">delete</button>
+          </form>
+        </div>
 
       </div>
     </div>
   </div>
 </div>
 <script>
-  
+
 
 </script>
 <%- include('./partials/footer') %>

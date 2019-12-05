@@ -82,12 +82,17 @@
 
     </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('select');
         var instances = M.FormSelect.init(elems);
     });
-
+    var allCards = {
+        <% cards.forEach( c => { %>
+            '<%= c.variety._id %>': '<%= c._id %>',
+        <% }); %>
+    }
 
 </script>
 <%- include('./partials/footer') %>

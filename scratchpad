@@ -1,0 +1,23 @@
+ <% if(mycelium.note) { %>
+          <p><b>Note: </b><%= mycelium.note %></p>
+          <% } %>
+
+
+<li class="active">
+            <div class="collapsible-header"><i class="material-icons">edit</i>note</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">edit</i>Add/ Edit
+              note
+            </div>
+            <div class="collapsible-body">
+
+              <form action="/cards/<%= 
+              mycelium._id %>" method="POST">
+                <input type="text" placeholder="Type current status here" name="note">
+                <button class="waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add
+                  note</button>
+              </form>
+            </div>
+          </li>
