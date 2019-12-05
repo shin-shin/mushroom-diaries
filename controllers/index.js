@@ -193,13 +193,6 @@ function createLog(req, res, next) {
 }
 
 function editLog(req, res) {
-  // console.log("EDIT");
-  // console.log("*************")
-  // console.table(req.body);
-  // console.log("******")
-  // console.log(req.params.id);
-  // console.log("*****************")
-
 
   Mycelium.findById(req.params.id).populate('mycelium.log')
     .exec(function (err, mycelium) {
@@ -208,20 +201,34 @@ function editLog(req, res) {
       console.log("mycelium.log after populate ");
       console.log("mycelium.log.text ", mycelium.log[req.params.idx].text);
       mycelium.log[req.params.idx].text = req.body.text
-      // mycelium.log.findById(req.body._id, function (err) {
-      //   mycelium.log.text = req.body.text;
-      //   mycelium.save(function (err) {
-      //     res.redirect(`/cards/${req.params.id}`);
-      //   })
-      // })
 
       mycelium.save(function (err) {
         console.log("save error ", err);
         res.redirect(`/cards/${req.params.id}`);
       })
-    }
-    )
+    })
 }
+function deleteLog(req, res) {
+
+  Mycelium.findById(req.params.id).populate('mycelium.log')
+    .exec(function (err, mycelium) {
+      console.log("findById error ", err);
+
+      console.log("mycelium.log after populate ");
+      console.log("mycelium.log.text ", mycelium.log[req.params.idx]._id);
+
+      mycelium.log.findOneAndDelete({_id: mycelium.log[req.params.idx]._id}, function (err) {
+        console.log("save error ", err);
+      
+        console.log("deleted a log");
+  
+        mycelium.save(function (err) {
+          console.log("save error ", err);
+          res.redirect(`/cards/${req.params.id}`);
+        })
+      })
+
+})}
 
 
 module.exports = {
@@ -232,5 +239,6 @@ module.exports = {
   archive,
   delete: delMush,
   createLog,
-  editLog
+  editLog,
+  deleteLog
 }

@@ -38,8 +38,11 @@
                   <p><b>Date: </b><%= moment(m.createdAt).format('MMMM Do, YYYY') %></p>
                   <p><b>Log: </b><%= m.text %></p>
                   <a class="waves-effect waves-light btn-small blue-grey lighten-2" idx="<%= idx %>" href="#">edit log</a>
-                  <button class="waves-effect waves-light btn-small blue-grey lighten-2 white-text"
-              href="/">delete</button>
+                  <form action="/cards/<%= 
+                  mycelium._id %>/logs/<%= idx %>?_method=DELETE" method="POST" name="delete" class="">
+                    <button class="waves-effect waves-light btn-small blue-grey lighten-2 white-text"
+                      href="/">delete</button>
+                  </form>
                 </div>
 
 

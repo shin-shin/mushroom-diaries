@@ -3452,6 +3452,7 @@ table span.badge {
 .section {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  min-height: 83vh;
 }
 
 .section.no-pad {

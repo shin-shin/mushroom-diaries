@@ -10,6 +10,7 @@ router.put('/cards/:id', cardsCtrl.archive);
 router.delete('/cards/:id', cardsCtrl.delete);
 router.post('/cards/:id/logs', cardsCtrl.createLog);
 router.put('/cards/:id/logs/:idx', cardsCtrl.editLog);
+router.delete('/cards/:id/logs/:idx', cardsCtrl.deleteLog);
 router.post('/cards', cardsCtrl.create);
 router.get('/', cardsCtrl.index);
 
