@@ -1,6 +1,7 @@
 # Mushroom Diaries
 
 A place to keep track of all mushroom you are growing.
+**[Take a look!](https://mushroom-diaries.herokuapp.com/)**
 
 ## User Stories
 
