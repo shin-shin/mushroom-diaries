@@ -12,14 +12,9 @@ var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET
 
 function index(req, res, next) {
   console.log("Index!!!")
-
-  // console.log("DARKSKY_URL: ", DARKSKY_URL + process.env.DARKSKY_SECRET + Navigator.geolocation.getCurrentPosition());
-
-
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
     let temp = Math.round(weatherJSON.currently.temperature)
-    // console.log('temperature ' + temp);
 
     let mode = true
     if ('archive' in req.query) {
@@ -32,9 +27,9 @@ function index(req, res, next) {
     console.log("user_id: ", req.user);
     Mycelium.find({ current: mode, user_id: user_id }).populate('variety').exec(
       function (err, cards) {
-        // console.log("found cards")
+        console.log("CARDS ", cards.length);
+        console.log(cards);
         res.render('index', {
-          // users: null,
           user: req.user,
           name: req.query.name,
           title: 'Mushroom Diaries',
@@ -46,10 +41,6 @@ function index(req, res, next) {
       }
     )
   });
-
-
-
-  //console.table(req.body);
 }
 
 function newCard(req, res, next) {
@@ -57,12 +48,10 @@ function newCard(req, res, next) {
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
     let temp = Math.round(weatherJSON.currently.temperature)
-    // console.log('temperature ' + temp);
 
     Variety.find({user_id: req.user._id}, function (err, vars) {
       console.log(`FOUND ${vars.length} OF VARS for USER ${req.user._id}`);
       Mycelium.find({}, function (err, cards) {
-        // console.log("found vars");
         res.render('new', {
           // users: null,
           user: req.user,
@@ -90,19 +79,17 @@ function newCard(req, res, next) {
 
 function create(req, res, next) {
   console.log("create starts");
-  // console.table(req.body);
   req.body.user_id = req.user._id;
   req.body.current = true;
 
-  // console.log("ID ", req.user._id);
   if (!req.body.variety) {
 
     console.log("NEW VARIETY");
-
     let variety = new Variety({
       name: req.body.new_variety,
       latin: req.body.new_latin,
-      abbr: req.body.new_abbr
+      abbr: req.body.new_abbr,
+      user_id: req.user._id
     });
     variety.save(function (err) {
       if (err) {
@@ -124,9 +111,7 @@ function create(req, res, next) {
     console.log("NEW VARIETY - CREATED!!!");
   } else {
 
-
     let card = new Mycelium(req.body);
-
     card.save(function (err) {
       if (err) {
         console.log("error when saving a card");
@@ -144,15 +129,10 @@ function show(req, res) {
     let weatherJSON = JSON.parse(body);
     let temp = Math.round(weatherJSON.currently.temperature);
 
-
-
     Mycelium.findById(req.params.id)
       .populate('variety')
       .exec(function (err, mycelium) {
-        // console.log("mycelium ", mycelium);
-
         res.render('show', {
-
           user: req.user,
           name: req.query.name,
           title: mycelium.variety.name,
@@ -161,13 +141,9 @@ function show(req, res) {
           mycelium,
         });
       })
-
-
-
   })
-
-
 }
+
 
 function archive(req, res) {
   Mycelium.findById(req.params.id, function (err, mycelium) {
@@ -178,6 +154,8 @@ function archive(req, res) {
     })
   })
 }
+
+
 function delMush(req, res) {
   console.log("DELETE MUSHROOM");
   Mycelium.deleteOne({ _id: req.params.id }, function (err) {
@@ -185,18 +163,12 @@ function delMush(req, res) {
   })
 }
 
-function createLog(req, res, next) {
-  // console.log("create LOG starts");
-  // console.table(req.body);
 
+function createLog(req, res, next) {
 
   Mycelium.findById(req.params.id, function (err, mycelium) {
-    // console.log("NEW STATUS LOG");
 
     mycelium.log.push({ text: req.body.text });
-    // mycelium.log = req.body;
-
-    // console.log("mycelium.log ", mycelium.log);
 
     mycelium.save(function (err) {
       res.redirect(`/cards/${req.params.id}`);
@@ -204,12 +176,13 @@ function createLog(req, res, next) {
   })
 }
 
+
+
 function editLog(req, res) {
 
   Mycelium.findById(req.params.id).populate('mycelium.log')
     .exec(function (err, mycelium) {
       console.log("findById error ", err);
-
       console.log("mycelium.log after populate ");
       console.log("mycelium.log.text ", mycelium.log[req.params.idx].text);
       mycelium.log[req.params.idx].text = req.body.text
@@ -220,6 +193,8 @@ function editLog(req, res) {
       })
     })
 }
+
+
 function deleteLog(req, res) {
 
   Mycelium.findById(req.params.id).populate('mycelium.log')
@@ -230,17 +205,6 @@ function deleteLog(req, res) {
       console.log("mycelium.log.text ", mycelium.log[req.params.idx]._id);
 
       mycelium.log.splice(req.params.idx, 1)
-
-      // mycelium.log.findOneAndDelete({_id: mycelium.log[req.params.idx]._id}, function (err) {
-      //   console.log("save error ", err);
-      
-      //   console.log("deleted a log");
-  
-      //   mycelium.save(function (err) {
-      //     console.log("save error ", err);
-      //     res.redirect(`/cards/${req.params.id}`);
-      //   })
-      // })
 
       mycelium.save(function (err) {
         console.log("save error ", err);

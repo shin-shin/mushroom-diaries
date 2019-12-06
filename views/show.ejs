@@ -14,12 +14,12 @@
           <p>
             <b>Label:</b> <%= mycelium.variety.abbr %>
             <% if (mycelium.gen) { %>
-                <%= `:${mycelium.gen}` %>
-                <% if (mycelium.suf){ %>
-                <%= `:${mycelium.suf}` %>
-                <% } %>
-              <% } %>
-              </p>
+            <%= `:${mycelium.gen}` %>
+            <% if (mycelium.suf){ %>
+            <%= `:${mycelium.suf}` %>
+            <% } %>
+            <% } %>
+          </p>
           <% if(mycelium.parent) { %>
           <p><b>Parent: </b><%= mycelium.parent %></p>
           <% } %>
@@ -33,11 +33,12 @@
             <div class="collapsible-body log">
 
               <% mycelium.log.forEach( (m, idx) => {  %>
-                <div>
+              <div>
                 <div class="text">
                   <p><b>Date: </b><%= moment(m.createdAt).format('MMMM Do, YYYY') %></p>
                   <p><b>Log: </b><%= m.text %></p>
-                  <a class="waves-effect waves-light btn-small blue-grey lighten-2" idx="<%= idx %>" href="#">edit log</a>
+                  <a class="waves-effect waves-light btn-small blue-grey lighten-2" idx="<%= idx %>" href="#">edit
+                    log</a>
                   <form action="/cards/<%= 
                   mycelium._id %>/logs/<%= idx %>?_method=DELETE" method="POST" name="delete">
                     <button class="waves-effect waves-light btn-small blue-grey lighten-2 white-text"
@@ -51,7 +52,6 @@
                   <form action="/cards/<%= 
                   mycelium._id %>/logs/<%= idx %>?_method=PUT" method="POST">
                     <input type="text" placeholder="" name="text" value="<%= m.text %>">
-                    <!-- <input type="hidden" placeholder="" name="_id" value="<%= m._id %>"> -->
                     <button class=" waves-effect waves-light btn-small blue-grey lighten-2 btn-flat white-text"
                       href="/">save log</button>
                   </form>
@@ -65,15 +65,17 @@
           </li>
           <% } %>
           <li>
-            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">edit</i>Add Status</div>
+            <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">edit</i>Add Status
+            </div>
             <div class="collapsible-body log">
               <div>
-              <form action="/cards/<%= 
+                <form action="/cards/<%= 
               mycelium._id %>/logs/" method="POST">
-                <input type="text" placeholder="Type current status here" name="text">
-                <button class=" waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add status</button>
-              </form>
-            </div>
+                  <input type="text" placeholder="Type current status here" name="text">
+                  <button class=" waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text"
+                    href="/">add status</button>
+                </form>
+              </div>
             </div>
           </li>
         </ul>
