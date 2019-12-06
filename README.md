@@ -24,9 +24,9 @@ AAU I want to be able to add logs for each mycelium I am working with, as well a
 
 
 ## Screenshots
-![Screenshot](public/images/screenshot1.png)![Screenshot](public/images/screenshot2.png)
-![Screenshot](public/images/screenshot4.png)![Screenshot](public/images/screenshot3.png)
-![Screenshot](public/images/screenshot6.png)![Screenshot](public/images/screenshot5.png)
+![Screenshot](public/images/screenshot1.png)
+![Screenshot](public/images/screenshot2.png)
+![Screenshot](public/images/screenshot3.png)
 
 
 ## Technologies Used
