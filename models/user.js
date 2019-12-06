@@ -8,10 +8,7 @@ var userSchema = new Schema({
     required: true
   },
   email: String,
-  mycelium: {
-    type: Schema.Types.ObjectId,
-    ref: "Mycelium"
-  },
+  
   googleId: String
 }, {
   timestamps: true
