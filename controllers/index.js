@@ -26,7 +26,12 @@ function index(req, res, next) {
     if ('archive' in req.query) {
       mode = false
     }
-    Mycelium.find({ current: mode }).populate('variety').exec(
+    let user_id = null
+    if (req.user) {
+      user_id = req.user._id
+    }
+    console.log("user_id: ", req.user);
+    Mycelium.find({ current: mode, user_id: user_id }).populate('variety').exec(
       function (err, cards) {
         // console.log("found cards")
         res.render('index', {
