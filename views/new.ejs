@@ -4,79 +4,75 @@
         <br>
 
         <div class="row center">
-        <div class="card">
-        <div class="card-content">
-            <form action="/cards" method="POST" name="mycelium">
-                <input type="hidden" name="foo" value="bla">
-                <div class="input-field col s12">
-                    <select name="variety">
-                        <option value=""  selected>Select mushroom variety</option>
-                        <% vars.forEach( v => { %>
-                        <option value="<%= v._id %>"><%= v.name %></option>
-                        <% }); %>
-                    </select>
-                    <p>or</p>
-                    <input placeholder="Mushroom variety" name="new_variety" type="text" class="validate">
-                </div><br><br><br><br>
+            <div class="card">
+                <div class="card-content new-card">
+                    <form action="/cards" method="POST" name="mycelium">
+                        <div class="input-field col s12">
+                            <select name="variety">
+                                <option value="" selected>Select mushroom variety</option>
+                                <% vars.forEach( v => { %>
+                                <option value="<%= v._id %>"><%= v.name %></option>
+                                <% }); %>
+                            </select>
+                        </div><br><br><br><br>
+                        <div>
+                            <p>or</p>
+                            <div class="input-field col s12">
+                                <input placeholder="Mushroom variety" name="new_variety" type="text" class="validate">
+                            </div>
+                            <div class="input-field col s12">
+                                <input placeholder="latin" type="text" class="validate" name="new_latin">
+                            </div><br><br><br><br>
+                            <div class="input-field col s12">
+                                <input placeholder="abbriviation" type="text" class="validate" name="new_abbr">
+                            </div><br><br><br><br>
+                        </div>
+
+                        <div>
+                            <div class="input-field col s12">
+                                <input placeholder="Add generation" type="text" class="validate" name="gen">
+                                <!-- <label for="mycelium">Generation</label> -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="input-field col s12">
+                                <input placeholder="Add suffix" type="text" class="validate" name="suf">
+                                <!-- <label for="mycelium">Suffix</label> -->
+                            </div>
+                        </div>
 
 
-                <div class="input-field col s12">
-                    <input placeholder="latin" type="text" class="validate" name="new_latin">
-                </div><br><br><br><br>
+
+                        <div class="input-field col s12">
+                            <select name="type">
+                                <option value="" disabled selected>Select type</option>
+                                <% types.forEach( t => { %>
+                                <option value="<%= t %>"><%= t %></option>
+                                <% }); %>
+                            </select>
+
+                        </div><br><br><br><br>
 
 
-                <div class="input-field col s12">
-                    <input placeholder="abbriviation" type="text" class="validate" name="new_abbr">
-                </div><br><br><br><br>
+                        <div>
+                            <div class="input-field col s12">
 
-                <div class="input-field col s12">
-                    <input placeholder="Add generation" type="text" class="validate" name="gen">
-                    <label for="mycelium">Generation</label>
+                                <input placeholder="" type="date" class="validate" form>
+                                <!-- <label for="mycelium">date</label> -->
+                            </div>
+                        </div><br><br><br><br>
+
+                        
+
+                        <button class="waves-effect waves-light btn-large blue-grey lighten-2"
+                            type="submit">create</button>
+                    </form>
+
+
+
                 </div>
-
-                <div class="input-field col s12">
-                    <input placeholder="Add suffix" type="text" class="validate" name="suf">
-                    <label for="mycelium">Suffix</label>
-                </div>
-
-
-
-                <div class="input-field col s12">
-                    <select name="type">
-                        <option value="" disabled selected>Select type</option>
-                        <% types.forEach( t => { %>
-                        <option value="<%= t %>"><%= t %></option>
-                        <% }); %>
-                    </select>
-
-                </div><br><br><br><br>
-
-
-                <div class="input-field col s12">
-
-                    <input placeholder="" type="date" class="validate" form>
-                    <label for="mycelium">date</label>
-                </div><br><br><br><br>
-
-                <!-- <div class="input-field col s12">
-                    <select name="parent">
-                        <option value="" disabled selected>Select parent</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                    <p>or</p>
-                    <input placeholder="Mushroom" type="text" class="validate" name="parent">
-                </div> -->
-
-                <button class="waves-effect waves-light btn-large blue-grey lighten-2" type="submit">create</button>
-            </form>
-
-
-
-
-        </div>
-        </div>
+            </div>
         </div>
         <br><br>
 
@@ -88,11 +84,7 @@
         var elems = document.querySelectorAll('select');
         var instances = M.FormSelect.init(elems);
     });
-    var allCards = {
-        <% cards.forEach( c => { %>
-            '<%= c.variety._id %>': '<%= c._id %>',
-        <% }); %>
-    }
+    
 
 </script>
 <%- include('./partials/footer') %>

@@ -28,11 +28,10 @@
 
       <!--   Icon Section   -->
 
-      <div class="row">
-      <% cards.forEach(c => { %>
+      <div class="row cards">
+      <% cards.forEach((c, idx) => { %>
 
-
-        <div class="col s12 m4">
+        <div class="col s12 m4 xl4">
           <div class="card">
             <div class="card-content">
               <h5 class="center"><%= c.variety.name %></h5>
@@ -59,6 +58,8 @@
 
           </div>
         </div>
+
+
         <% }); %>
       </div>
 

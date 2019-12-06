@@ -30,6 +30,15 @@ main {
   display: none;
 }
 
+.new-card form > div:nth-child(even) {
+  background-color: #F6F9FB ;
+}
+.new-card form div{
+  padding: 0 24px;
+}
+.card-content.new-card{
+  padding: 24px 0;
+}
 .log > div {
   padding: 12px 24px 24px 24px;
 }
@@ -62,4 +71,54 @@ main {
 
  .text form {
    display: inline-block;
+ }
+ .row.cards {
+   display: grid;
+   grid-template-columns: 1fr;
+   justify-content: center;
+
+ }
+ .row.cards .col.m4 {
+  width: 100%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+ .row.cards .col.xl4 {
+  width: 100%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+
+
+ @media only screen and (min-width: 600px) {
+  .row.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+ 
+  }
+ 
+
+}
+ @media only screen and (min-width: 992px) {
+  .row.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+ 
+  }
+ 
+
+}
+@media only screen and (min-width: 1400px) {
+  .row.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+ 
+  }
  }

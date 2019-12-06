@@ -217,15 +217,22 @@ function deleteLog(req, res) {
       console.log("mycelium.log after populate ");
       console.log("mycelium.log.text ", mycelium.log[req.params.idx]._id);
 
-      mycelium.log.findOneAndDelete({_id: mycelium.log[req.params.idx]._id}, function (err) {
-        console.log("save error ", err);
+      mycelium.log.splice(req.params.idx, 1)
+
+      // mycelium.log.findOneAndDelete({_id: mycelium.log[req.params.idx]._id}, function (err) {
+      //   console.log("save error ", err);
       
-        console.log("deleted a log");
+      //   console.log("deleted a log");
   
-        mycelium.save(function (err) {
-          console.log("save error ", err);
-          res.redirect(`/cards/${req.params.id}`);
-        })
+      //   mycelium.save(function (err) {
+      //     console.log("save error ", err);
+      //     res.redirect(`/cards/${req.params.id}`);
+      //   })
+      // })
+
+      mycelium.save(function (err) {
+        console.log("save error ", err);
+        res.redirect(`/cards/${req.params.id}`);
       })
 
 })}

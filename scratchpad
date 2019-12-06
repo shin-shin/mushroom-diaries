@@ -21,3 +21,30 @@
               </form>
             </div>
           </li>
+
+
+
+          <% if (idx % 3 == 0) { %>
+</div>
+  <div class="row">
+<% } %>
+
+
+
+<!-- <div class="input-field col s12">
+                    <select name="parent">
+                        <option value="" disabled selected>Select parent</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <p>or</p>
+                    <input placeholder="Mushroom" type="text" class="validate" name="parent">
+                </div> -->
+
+
+                var allCards = {
+        <% cards.forEach(c => { %>
+        '<%= c.variety._id %>': '<%= c._id %>',
+        <% }); %>
+    }
