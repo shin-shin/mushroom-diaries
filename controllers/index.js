@@ -5,7 +5,6 @@ var Variety = require('../models/variety');
 var request = require('request');
 var moment = require('moment');
 
-const DarkSkyApi = require('dark-sky-api');
 var DARKSKY_URL = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET}/30.267153,-97.7430608`;
 
 
@@ -60,7 +59,7 @@ function newCard(req, res, next) {
     let temp = Math.round(weatherJSON.currently.temperature)
     // console.log('temperature ' + temp);
 
-    Variety.find({}, function (err, vars) {
+    Variety.find({user_id: req.user._id}, function (err, vars) {
       Mycelium.find({}, function (err, cards) {
         // console.log("found vars");
         res.render('new', {
@@ -138,7 +137,7 @@ function show(req, res) {
     let weatherJSON = JSON.parse(body);
     let temp = Math.round(weatherJSON.currently.temperature);
 
-    
+
 
     Mycelium.findById(req.params.id)
       .populate('variety')
