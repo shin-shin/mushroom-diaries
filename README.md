@@ -23,15 +23,19 @@ AAU I want to be able to add logs for each mycelium I am working with, as well a
 
 
 
-## Wireframes
-![wireframes](public/images/wireframes.png)
+## Screenshots
+![Screenshot](public/images/screenshot1.png)![Screenshot](public/images/screenshot2.png)
+![Screenshot](public/images/screenshot4.png)![Screenshot](public/images/screenshot3.png)
+![Screenshot](public/images/screenshot6.png)![Screenshot](public/images/screenshot5.png)
 
 
-## Entity Relationship Diagram (ERD)
-![ERD](public/images/image.png)
+## Technologies Used
+* HTML/CSS/Javascript
+* Node/Express
+* MongoDB/Mongoose
+* DarkSky API
 
-## Nice to haves
-
+## Next Steps
 1. edit mycelium information
 2. back to top button
 3. calendar
