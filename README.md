@@ -18,21 +18,25 @@ AAU I want to see detailed card if I click on a view button of a card on a landi
 
 AAU I want to be able to archive cards that are not current anymore.
 
-AAU I want to edit mycelium information.
-
 AAU I want to be able to add logs for each mycelium I am working with, as well as a summary note about this experience.
 
-AAU I want to be able to see parent mycelium and children mycelium for each card (where parent is provided).
+
 
 ## Wireframes
 ![wireframes](public/images/wireframes.png)
 
+
+## Entity Relationship Diagram (ERD)
+![ERD](public/images/image.png)
+
 ## Nice to haves
 
-1. footer menu
+1. edit mycelium information
 2. back to top button
 3. calendar
-4. weather api
+4. weather api for current location
 5. connect with your own weather station
 6. add images to logs
+7. create a child button on a show page
+8. ability to see parent mycelium and children mycelium for each card (where parent is provided)
 
