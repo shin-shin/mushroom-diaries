@@ -136,7 +136,9 @@ function show(req, res) {
 
   request(DARKSKY_URL, (err, response, body) => {
     let weatherJSON = JSON.parse(body);
-    let temp = Math.round(weatherJSON.currently.temperature)
+    let temp = Math.round(weatherJSON.currently.temperature);
+
+    
 
     Mycelium.findById(req.params.id)
       .populate('variety')

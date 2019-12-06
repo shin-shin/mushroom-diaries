@@ -4,14 +4,14 @@ const passport = require('passport');
 const cardsCtrl = require('../controllers/index')
 
 /* GET home page. */
-router.get('/cards/new', cardsCtrl.new);
-router.get('/cards/:id', cardsCtrl.show);
-router.put('/cards/:id', cardsCtrl.archive);
-router.delete('/cards/:id', cardsCtrl.delete);
-router.post('/cards/:id/logs', cardsCtrl.createLog);
-router.put('/cards/:id/logs/:idx', cardsCtrl.editLog);
-router.delete('/cards/:id/logs/:idx', cardsCtrl.deleteLog);
-router.post('/cards', cardsCtrl.create);
+router.get('/cards/new', isLoggedIn, cardsCtrl.new);
+router.get('/cards/:id', isLoggedIn, cardsCtrl.show);
+router.put('/cards/:id', isLoggedIn, cardsCtrl.archive);
+router.delete('/cards/:id', isLoggedIn, cardsCtrl.delete);
+router.post('/cards/:id/logs', isLoggedIn, cardsCtrl.createLog);
+router.put('/cards/:id/logs/:idx', isLoggedIn, cardsCtrl.editLog);
+router.delete('/cards/:id/logs/:idx', isLoggedIn, cardsCtrl.deleteLog);
+router.post('/cards', isLoggedIn, cardsCtrl.create);
 router.get('/', cardsCtrl.index);
 
 
@@ -34,5 +34,10 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()) return next();
+  res.redirect('/auth/google');
+}
 
 module.exports = router;

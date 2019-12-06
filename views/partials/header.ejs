@@ -18,12 +18,14 @@
         <div class="nav-wrapper container">
             <a id="logo-container" href="/" class="brand-logo">Mushroom&nbsp;Diaries</a>
             <ul class="right hide-on-med-and-down">
+                <% if (user) { %>
                 <li><a href="/">current</a></li>
                 <li><a href="/cards/new">new</a></li>
                 <li><a href="/?archive">archive</a></li>
                 <!-- <li><a href="/">varieties</a></li>
-                <li><a href="/weather">weather</a></li>
-                <li><a href="/calendar">calendar</a></li> -->
+                                <li><a href="/weather">weather</a></li>
+                                <li><a href="/calendar">calendar</a></li> -->
+                <% } %>
                 <li>
                     <% if (user) { %>
                     <a href="/logout">Log Out</a>
@@ -34,12 +36,14 @@
             </ul>
 
             <ul id="nav-mobile" class="sidenav blue-grey  lighten-1">
+                <% if (user) { %>
                 <li><a href="/">current</a></li>
                 <li><a href="/cards/new">new</a></li>
                 <li><a href="/?archive">archive</a></li>
                 <!-- <li><a href="/">varieties</a></li>
-                <li><a href="/weather">weather</a></li>
-                    <li><a href="/calendar">calendar</a></li> -->
+                        <li><a href="/weather">weather</a></li>
+                        <li><a href="/calendar">calendar</a></li> -->
+                <% } %>
                 <li>
                     <% if (user) { %>
                     <a href="/logout">Log Out</a>
@@ -55,5 +59,5 @@
         <div class="nav-wrapper container">
             <h6 class="left blue-grey-text text-lighten-2"><%= moment().format('MMM D') %></h6>
             <h6 class="right blue-grey-text text-lighten-2"><%= temp + String.fromCharCode(176) + "F"%></h6>
-    </div>
+        </div>
     </nav>
