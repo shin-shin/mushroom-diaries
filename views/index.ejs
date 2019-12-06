@@ -10,10 +10,7 @@
     <br><br>
     <div class="row center">
 
-
       <a href="/auth/google" class="btn-large waves-effect waves-light blue-grey lighten-2">Login with Google</a>
-
-
 
     </div>
     <br><br>
@@ -30,7 +27,7 @@
       <!--   Icon Section   -->
 
       <div class="row cards">
-      <% cards.forEach((c, idx) => { %>
+        <% cards.forEach((c, idx) => { %>
 
         <div class="col s12 m4 xl4">
           <div class="card">
@@ -41,31 +38,29 @@
                 <%= c.type %>
               </p>
               <p class="light">
-              
-                <b>Label: </b><%= c.variety.abbr %><% if (c.gen) { %><%= `:${c.gen}` %><% if (c.suf){ %><%= `:${c.suf}` %>
+
+                <b>Label:
+                </b><%= c.variety.abbr %><% if (c.gen) { %><%= `:${c.gen}` %><% if (c.suf){ %><%= `:${c.suf}` %>
                 <% } %>
-              <% } %>
+                <% } %>
               </p>
               <p class="light">
                 <%= moment(c.date).format('MMMM Do, YYYY') %>
               </p>
             </div>
 
-            <!-- <a class="waves-effect waves-light btn blue-grey lighten-2" href="/cards/<%= c._id %>/edit">edit</a> -->
-            <a class="waves-effect waves-light btn btn-flat white-text blue-grey lighten-2 bottom-btn" href="/cards/<%= c._id %>">view</a>
+            <a class="waves-effect waves-light btn btn-flat white-text blue-grey lighten-2 bottom-btn"
+              href="/cards/<%= c._id %>">view</a>
 
           </div>
         </div>
-
-
         <% }); %>
       </div>
 
       <div class="row">
         <div class="col s12">
           <a class="waves-effect waves-light btn-large blue-grey lighten-2 bottom-btn" href="/cards/new"><i
-              class="material-icons right">add</i>new
-            card</a>
+              class="material-icons right">add</i>new card</a>
         </div>
       </div>
 
