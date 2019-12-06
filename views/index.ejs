@@ -7,6 +7,7 @@
     <div class="row center">
       <h5 class="header col s12 light">A place to keep track of all your mushroom growing processes.</h5>
     </div>
+    <br><br>
     <div class="row center">
 
 
@@ -40,11 +41,8 @@
                 <%= c.type %>
               </p>
               <p class="light">
-              <% if (c.gen) { %>
-                <b>Label: </b>
-                <%= `${c.variety.abbr}:${c.gen}` %>
-                <% if (c.suf){ %>
-                  <%= `:${c.suf}` %>
+              
+                <b>Label: </b><%= c.variety.abbr %><% if (c.gen) { %><%= `:${c.gen}` %><% if (c.suf){ %><%= `:${c.suf}` %>
                 <% } %>
               <% } %>
               </p>
@@ -54,7 +52,7 @@
             </div>
 
             <!-- <a class="waves-effect waves-light btn blue-grey lighten-2" href="/cards/<%= c._id %>/edit">edit</a> -->
-            <a class="waves-effect waves-light btn blue-grey lighten-2" href="/cards/<%= c._id %>">view</a>
+            <a class="waves-effect waves-light btn btn-flat white-text blue-grey lighten-2 bottom-btn" href="/cards/<%= c._id %>">view</a>
 
           </div>
         </div>
@@ -63,10 +61,9 @@
         <% }); %>
       </div>
 
-      <br><br>
       <div class="row">
-        <div class="col s12 m4">
-          <a class="waves-effect waves-light btn-large blue-grey lighten-2" href="/cards/new"><i
+        <div class="col s12">
+          <a class="waves-effect waves-light btn-large blue-grey lighten-2 bottom-btn" href="/cards/new"><i
               class="material-icons right">add</i>new
             card</a>
         </div>

@@ -12,11 +12,11 @@
           <p><b>Type: </b><%= mycelium.type %></p>
           <p><b>Date: </b><%= moment(mycelium.date).format('MMMM Do, YYYY') %></p>
           <p>
-              <% if (mycelium.gen) { %>
-                <b>Label: </b>
-                <%= `${mycelium.variety.abbr}:${mycelium.gen}` %>
+            <b>Label:</b> <%= mycelium.variety.abbr %>
+            <% if (mycelium.gen) { %>
+                <%= `:${mycelium.gen}` %>
                 <% if (mycelium.suf){ %>
-                  <%= `:${mycelium.suf}` %>
+                <%= `:${mycelium.suf}` %>
                 <% } %>
               <% } %>
               </p>
@@ -26,7 +26,7 @@
         </div>
 
         <ul class="collapsible expandable">
-            <li>
+            <!-- <li>
                 <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">account_tree</i>Add Parent</div>
                 <div class="collapsible-body log">
                   <div>
@@ -37,7 +37,7 @@
                   </form>
                 </div>
                 </div>
-              </li>
+              </li> -->
           <% if(mycelium.log.length > 0) { %>
           <li class="active">
             <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">list_alt</i>Status

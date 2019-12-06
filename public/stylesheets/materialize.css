@@ -5585,7 +5585,7 @@ button.btn-floating {
 
 .dropdown-content li > a, .dropdown-content li > span {
   font-size: 16px;
-  color: #26a69a;
+  color: #455a64;
   display: block;
   line-height: 22px;
   padding: 14px 16px;
@@ -7239,11 +7239,13 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus {
 }
 
 .select-dropdown.dropdown-content li:hover {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: #eceff1 ;
+  /* background-color: rgba(0, 0, 0, 0.08); */
 }
 
 .select-dropdown.dropdown-content li.selected {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: #F6F9FB;
+  /* background-color: rgba(0, 0, 0, 0.03); */
 }
 
 .prefix ~ .select-wrapper {
@@ -7567,7 +7569,7 @@ input[type=range]::-ms-thumb {
 }
 
 .sidenav li > a {
-  color: rgba(0, 0, 0, 0.87);
+  /* color: rgba(0, 0, 0, 0.87); */
   display: block;
   font-size: 14px;
   font-weight: 500;

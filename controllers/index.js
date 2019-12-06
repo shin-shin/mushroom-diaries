@@ -60,6 +60,7 @@ function newCard(req, res, next) {
     // console.log('temperature ' + temp);
 
     Variety.find({user_id: req.user._id}, function (err, vars) {
+      console.log(`FOUND ${vars.length} OF VARS for USER ${req.user._id}`);
       Mycelium.find({}, function (err, cards) {
         // console.log("found vars");
         res.render('new', {
@@ -69,7 +70,13 @@ function newCard(req, res, next) {
           title: 'New card',
           moment,
           temp,
-          vars,
+          vars: vars.sort((a,b)=>{
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+            let c = 0;
+            nameA > nameB ? c = 1 : c = -1;
+            return c
+          }),
           cards,
           testText: "Foo",
           types: ['liquid culture', 'agar culture', 'slant', 'grain spawn', 'sawdust spawn', 'woodchip spawn', 'plug spawn', 'substrate', 'log', 'outdoor patch']
@@ -152,7 +159,6 @@ function show(req, res) {
           moment,
           temp,
           mycelium,
-          // label: `${mycelium.variety.abbr}:${mycelium.gen}:${mycelium.suf}`
         });
       })
 

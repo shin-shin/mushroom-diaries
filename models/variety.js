@@ -13,7 +13,13 @@ const varietySchema = new Schema({
     abbr: {
         type: String,
         required: true
+    },
+    user_id: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
+
 },
 {
     timestamps: true

@@ -30,14 +30,20 @@ main {
   display: none;
 }
 
-.new-card form > div:nth-child(even) {
+/* .new-card > div:nth-child(even) {
+  background-color: #F6F9FB ;
+} */
+.row .new-card .col {
+  float: none;
+}
+.light-blue-bg {
   background-color: #F6F9FB ;
 }
-.new-card form div{
+.new-card .input-field{
   padding: 0 24px;
 }
 .card-content.new-card{
-  padding: 24px 0;
+  padding: 24px 0 0;
 }
 .log > div {
   padding: 12px 24px 24px 24px;
@@ -46,7 +52,10 @@ main {
   background-color: #F6F9FB ;
 }
 
-
+.bottom-btn {
+  width: 100%;
+  display: inline-block;
+ }
 .bottom-form-buttons{
  display: flex;
  justify-content: space-between;

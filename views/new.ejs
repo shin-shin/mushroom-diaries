@@ -6,40 +6,36 @@
         <div class="row center">
             <div class="card">
                 <div class="card-content new-card">
-                    <form action="/cards" method="POST" name="mycelium">
+                    <form action="/cards" method="POST" name="mycelium" class="new-card">
                         <div class="input-field col s12">
                             <select name="variety">
-                                <option value="" selected>Select mushroom variety</option>
+                                <option value="" selected>Select mushroom species</option>
                                 <% vars.forEach( v => { %>
                                 <option value="<%= v._id %>"><%= v.name %></option>
                                 <% }); %>
                             </select>
                         </div>
-                        <div>
+                        <div class="light-blue-bg">
                             <p>or</p>
                             <div class="input-field col s12">
-                                <input placeholder="Mushroom variety" name="new_variety" type="text" class="validate">
+                                <input placeholder="Mushroom species" name="new_variety" type="text" class="validate">
                             </div>
                             <div class="input-field col s12">
-                                <input placeholder="latin" type="text" class="validate" name="new_latin">
+                                <input placeholder="Scientific name" type="text" class="validate" name="new_latin">
                             </div>
                             <div class="input-field col s12">
-                                <input placeholder="abbriviation" type="text" class="validate" name="new_abbr">
+                                <input placeholder="Abbreviation" type="text" class="validate" name="new_abbr">
                             </div>
                         </div>
 
-                        <div>
-                            <div class="input-field col s12">
-                                <input placeholder="Add generation" type="text" class="validate" name="gen">
-                                <!-- <label for="mycelium">Generation</label> -->
-                            </div>
+                        <div class="input-field col s12">
+                            <input placeholder="Add generation" type="text" class="validate" name="gen">
+                            <!-- <label for="mycelium">Generation</label> -->
                         </div>
 
-                        <div>
-                            <div class="input-field col s12">
-                                <input placeholder="Add suffix" type="text" class="validate" name="suf">
-                                <!-- <label for="mycelium">Suffix</label> -->
-                            </div>
+                        <div class="input-field col s12">
+                            <input placeholder="Add suffix" type="text" class="validate" name="suf">
+                            <!-- <label for="mycelium">Suffix</label> -->
                         </div>
 
 
@@ -51,30 +47,21 @@
                                 <option value="<%= t %>"><%= t %></option>
                                 <% }); %>
                             </select>
-
                         </div>
 
 
-                        <div>
-                            <div class="input-field col s12">
-
-                                <input placeholder="" type="date" class="validate" form>
-                                <!-- <label for="mycelium">date</label> -->
-                            </div>
+                        <div class="input-field col s12">
+                            <input placeholder="" type="date" class="validate" name="date">
+                            <!-- <label for="mycelium">date</label> -->
                         </div>
 
-                        
 
-                        <button class="waves-effect waves-light btn-large blue-grey lighten-2"
-                            type="submit">create</button>
+
+                        <button class="waves-effect waves-light btn-large btn-flat blue-grey lighten-2 white-text bottom-btn" type="submit">create</button>
                     </form>
-
-
-
                 </div>
             </div>
         </div>
-        <br><br>
 
     </div>
 </div>
@@ -84,7 +71,5 @@
         var elems = document.querySelectorAll('select');
         var instances = M.FormSelect.init(elems);
     });
-    
-
 </script>
 <%- include('./partials/footer') %>
