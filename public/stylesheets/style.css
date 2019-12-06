@@ -21,7 +21,22 @@ body {
   background-image: url("/images/bg1.png");
   background-size: cover;
 }
-
+body.error {
+  background-image: url("/images/error-bg.png");
+}
+.error pre {
+  font-size: 95%;
+  
+}
+.error .card {
+  background:rgba(255, 255, 255, 0.705);
+}
+.error a {
+  width: 100%;
+}
+.error h1 {
+  margin-top: 2rem;
+}
 main {
   flex: 1 0 auto;
 }

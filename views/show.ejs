@@ -26,18 +26,6 @@
         </div>
 
         <ul class="collapsible expandable">
-            <!-- <li>
-                <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">account_tree</i>Add Parent</div>
-                <div class="collapsible-body log">
-                  <div>
-                  <form action="/cards/<%= 
-                  mycelium._id %>" method="POST">
-                    <input type="text" placeholder="Type current status here" name="text">
-                    <button class=" waves-effect waves-light btn-large blue-grey lighten-2 btn-flat white-text" href="/">add status</button>
-                  </form>
-                </div>
-                </div>
-              </li> -->
           <% if(mycelium.log.length > 0) { %>
           <li class="active">
             <div class="collapsible-header blue-grey lighten-2 white-text"><i class="material-icons">list_alt</i>Status
